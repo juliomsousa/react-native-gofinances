@@ -11,7 +11,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
-export default function App() {
+const App = () => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -19,7 +19,7 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    <AppLoading />;
+    return <AppLoading />;
   }
 
   return (
@@ -27,4 +27,6 @@ export default function App() {
       <Dashboard />
     </ThemeProvider>
   );
-}
+};
+
+export default App;

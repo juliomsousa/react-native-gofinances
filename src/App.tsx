@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from './screens/Dashboard';
+import { Dashboard } from './screens/Dashboard';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
 import theme from './globals/styles/theme';
@@ -10,6 +10,8 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import { Register } from './screens/Register';
+import { CategorySelect } from './screens/CategorySelect';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -24,7 +26,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Register />
+      {/* <Dashboard /> */}
+      {/* <CategorySelect /> */}
     </ThemeProvider>
   );
 };

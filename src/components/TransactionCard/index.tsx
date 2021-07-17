@@ -1,4 +1,5 @@
 import React from 'react';
+import { categories } from '../../utils/categories';
 import {
   Container,
   Title,
@@ -7,7 +8,7 @@ import {
   Category,
   Icon,
   CategoryName,
-  Date,
+  Date as DateText,
 } from './styles';
 
 interface Category {
@@ -17,9 +18,9 @@ interface Category {
 
 export interface TransactionCardProps {
   type: 'positive' | 'negative';
-  title: string;
+  name: string;
   amount: string;
-  category: Category;
+  category: string;
   date: string;
 }
 
@@ -28,20 +29,30 @@ interface Props {
 }
 
 const TransactionCard = ({ data }: Props) => {
-  const { title, amount, category, date, type } = data;
+  const { name, amount, category, date, type } = data;
+  const selectedCategory = categories.find((item) => item.key === category);
+
+  const formatDateToBR = (date: string) => {
+    return Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+    }).format(new Date(date));
+  };
+
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title>{name}</Title>
       <Amount type={type}>
         {type === 'negative' && '- '}
         {amount}
       </Amount>
       <Footer>
         <Category>
-          <Icon name={category.icon} />
-          <CategoryName>{category.name}</CategoryName>
+          <Icon name={selectedCategory?.icon} />
+          <CategoryName>{selectedCategory?.name}</CategoryName>
         </Category>
-        <Date>{date}</Date>
+        <DateText>{formatDateToBR(date)}</DateText>
       </Footer>
     </Container>
   );

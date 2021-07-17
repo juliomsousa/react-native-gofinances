@@ -18,8 +18,8 @@ export const AppRoutes = () => {
         inactiveTintColor: theme.colors.text,
         labelPosition: 'beside-icon',
         style: {
-          paddingVertical: Platform.OS === 'ios' ? 20 : 0,
-          height: 64,
+          // paddingVertical: Platform.OS === 'ios' ? 20 : 0,
+          // height: 64,
         },
       }}
     >

@@ -80,9 +80,9 @@ export const Register = () => {
       date: new Date(),
     };
 
-    const dataKey = '@gofinances:transactions';
-
+    
     try {
+      const dataKey = '@gofinances:transactions';
       const res = await AsyncStorage.getItem(dataKey);
       const currentData = res ? JSON.parse(res) : [];
 

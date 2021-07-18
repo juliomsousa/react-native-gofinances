@@ -8,6 +8,7 @@ import { TransactionTypeButton } from '../../components/Form/TransactionTypeButt
 import { Category, CategorySelect } from '../CategorySelect';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import uuid from 'react-native-uuid';
@@ -50,6 +51,8 @@ export const Register = () => {
 
   const navigation = useNavigation();
 
+  const { user } = useAuth();
+
   const handleTransactionTypeSelect = (type: 'positive' | 'negative') => {
     console.log({ type });
     setTransactionType(type);
@@ -81,9 +84,8 @@ export const Register = () => {
       date: new Date(),
     };
 
-    
     try {
-      const dataKey = '@gofinances:transactions';
+      const dataKey = `@gofinances:transactions_user:${user.id}`;
       const res = await AsyncStorage.getItem(dataKey);
       const currentData = res ? JSON.parse(res) : [];
 

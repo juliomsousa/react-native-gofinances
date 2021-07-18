@@ -6,6 +6,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useAuth } from '../../hooks/auth';
 import { addMonths, subMonths, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { HistoryCard } from '../../components/HistoryCard';
@@ -48,6 +49,7 @@ export const Resume = () => {
   );
 
   const theme = useTheme();
+  const { user } = useAuth();
   const bottomTabHeight = useBottomTabBarHeight();
 
   const handleDateChange = (action: 'prev' | 'next') => {
@@ -62,7 +64,7 @@ export const Resume = () => {
   };
 
   const loadData = async () => {
-    const dataKey = '@gofinances:transactions';
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
     const response = await AsyncStorage.getItem(dataKey);
     const responseFormatted = response ? JSON.parse(response) : [];
 

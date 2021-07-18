@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { HighlightCard } from '../../components/HighlightCard';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/auth';
 import {
   TransactionCard,
   TransactionCardProps,
@@ -48,6 +49,7 @@ export const Dashboard = () => {
   );
 
   const theme = useTheme();
+  const { user, signOut } = useAuth();
 
   const getLastTransactionDate = (
     collection: DataListProps[],
@@ -177,17 +179,17 @@ export const Dashboard = () => {
               <UserInfo>
                 <Photo
                   source={{
-                    uri: 'https://avatars.githubusercontent.com/u/22116665?v=4',
+                    uri: user.photo,
                   }}
                 />
 
                 <User>
                   <UserGreeting>Olá,</UserGreeting>
-                  <UserName>Julio!</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
 
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
             </UserWrapper>

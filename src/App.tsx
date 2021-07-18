@@ -4,13 +4,10 @@ import 'intl/locale-data/jsonp/pt-BR';
 import React from 'react';
 import { StatusBar } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { NavigationContainer } from '@react-navigation/native';
-import { AppRoutes } from './routes/app.routes';
 import { ThemeProvider } from 'styled-components';
-import { AuthProvider } from './hooks/auth';
+import { Routes } from './routes';
+import { AuthProvider, useAuth } from './hooks/auth';
 import theme from './globals/styles/theme';
-
-import { SignIn } from './screens/SignIn';
 
 import {
   useFonts,
@@ -26,23 +23,22 @@ const App = () => {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) {
+  const { userStorageLoading } = useAuth();
+
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar
-          barStyle="light-content"
-          translucent
-          backgroundColor={'transparent'}
-        />
-        <AuthProvider>
-          <SignIn />
-        </AuthProvider>
-        {/* <AppRoutes /> */}
-      </NavigationContainer>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor={'transparent'}
+      />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 };

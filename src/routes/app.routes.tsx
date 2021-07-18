@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+// import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';

@@ -40,7 +40,7 @@ interface HighlightData {
   total: HighlightProps;
 }
 
-const Dashboard = () => {
+export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
   const [highlightData, setHighlightData] = useState<HighlightData>(
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
     const transactionsFormatted: DataListProps[] = parsedData.map(
       (item: DataListProps) => {
-        if ((item.type === 'positive')) {
+        if (item.type === 'positive') {
           entriesSum += Number(item.amount);
         } else {
           expensesSum += Number(item.amount);
@@ -153,10 +153,10 @@ const Dashboard = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    loadTransactions();
-    // AsyncStorage.clear()
-  }, []);
+  // useEffect(() => {
+  //   // loadTransactions();
+  //   AsyncStorage.clear()
+  // }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -228,5 +228,3 @@ const Dashboard = () => {
     </Container>
   );
 };
-
-export { Dashboard };

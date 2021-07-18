@@ -7,7 +7,10 @@ import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './routes/app.routes';
 import { ThemeProvider } from 'styled-components';
+import { AuthProvider } from './hooks/auth';
 import theme from './globals/styles/theme';
+
+import { SignIn } from './screens/SignIn';
 
 import {
   useFonts,
@@ -35,7 +38,10 @@ const App = () => {
           translucent
           backgroundColor={'transparent'}
         />
-        <AppRoutes />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
+        {/* <AppRoutes /> */}
       </NavigationContainer>
     </ThemeProvider>
   );
